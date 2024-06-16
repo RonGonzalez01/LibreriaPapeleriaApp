@@ -1,0 +1,4 @@
+# Ignorar la carpeta .vs
+.vs/
+LibreriaPapeleriaApp/bin/
+LibreriaPapeleriaApp/obj/

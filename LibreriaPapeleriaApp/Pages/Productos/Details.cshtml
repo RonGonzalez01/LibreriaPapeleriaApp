@@ -1,0 +1,48 @@
+﻿@page
+@model LibreriaPapeleriaApp.Pages.Productos.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nombre
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Producto.Nombre
+        </dd>
+        <dt class="col-sm-2">
+            Descripción
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Producto.Descripcion
+        </dd>
+        <dt class="col-sm-2">
+            Precio
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Producto.Precio
+        </dd>
+        <dt class="col-sm-2">
+            Stock
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Producto.Stock
+        </dd>
+        <dt class="col-sm-2">
+            Categoria
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Producto.Categoria
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Producto.ProductoId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
