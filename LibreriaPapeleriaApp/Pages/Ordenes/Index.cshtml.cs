@@ -17,12 +17,12 @@ namespace LibreriaPapeleriaApp.Pages.Ordenes
             _context = context;
         }
 
-        public IList<Models.Ordenes> Ordenes { get; set; }
+        public IList<Models.Orden> Ordenes { get; set; }
 
         public async Task OnGetAsync()
         {
             Ordenes = await _context.Ordenes
-                .Include(o => o.Detalles) // Carga los detalles de la orden
+                .Include(o => o.DetallesOrden) // Carga los detalles de la orden
                 .ToListAsync();
         }
     }

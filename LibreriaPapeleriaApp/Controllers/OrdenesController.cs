@@ -19,7 +19,7 @@ namespace LibreriaPapeleriaApp.Controllers
         public async Task<IActionResult> Index()
         {
             var ordenes = await _context.Ordenes
-                .Include(o => o.Detalles)
+                .Include(o => o.DetallesOrden)
                 .ToListAsync();
 
             return View(ordenes);
