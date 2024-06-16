@@ -1,9 +1,0 @@
-C:\Users\Ronnie\source\repos\LibreriaPapeleriaApp\LibreriaPapeleriaApp\obj\Debug\net8.0\LibreriaPapeleriaApp.csproj.AssemblyReference.cache
-C:\Users\Ronnie\source\repos\LibreriaPapeleriaApp\LibreriaPapeleriaApp\obj\Debug\net8.0\LibreriaPapeleriaApp.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Ronnie\source\repos\LibreriaPapeleriaApp\LibreriaPapeleriaApp\obj\Debug\net8.0\LibreriaPapeleriaApp.AssemblyInfoInputs.cache
-C:\Users\Ronnie\source\repos\LibreriaPapeleriaApp\LibreriaPapeleriaApp\obj\Debug\net8.0\LibreriaPapeleriaApp.AssemblyInfo.cs
-C:\Users\Ronnie\source\repos\LibreriaPapeleriaApp\LibreriaPapeleriaApp\obj\Debug\net8.0\LibreriaPapeleriaApp.csproj.CoreCompileInputs.cache
-C:\Users\Ronnie\source\repos\LibreriaPapeleriaApp\LibreriaPapeleriaApp\obj\Debug\net8.0\LibreriaPapeleriaApp.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Ronnie\source\repos\LibreriaPapeleriaApp\LibreriaPapeleriaApp\obj\Debug\net8.0\LibreriaPapeleriaApp.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Ronnie\source\repos\LibreriaPapeleriaApp\LibreriaPapeleriaApp\obj\Debug\net8.0\LibreriaPapeleriaApp.RazorAssemblyInfo.cache
-C:\Users\Ronnie\source\repos\LibreriaPapeleriaApp\LibreriaPapeleriaApp\obj\Debug\net8.0\LibreriaPapeleriaApp.RazorAssemblyInfo.cs
