@@ -1,19 +1,23 @@
 ﻿@page
 @model LibreriaPapeleriaApp.Pages.Usuarios.IndexModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Usuarios";
 }
 
-<h1>Index</h1>
+<h1>Usuarios</h1>
 
 <p>
-    <a asp-page="./Create">Create New</a>
+    <a asp-page="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>Nombre de Usuario</th>
-            <th>Correo</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuarios[0].NombreUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuarios[0].Email)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -21,12 +25,16 @@
         @foreach (var item in Model.Usuarios)
         {
             <tr>
-                <td>@item.NombreUsuario</td>
-                <td>@item.Correo</td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.UsuarioId">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.UsuarioId">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.UsuarioId">Delete</a>
+                    @Html.DisplayFor(modelItem => item.NombreUsuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@item.UsuarioId">Edit</a> |
+                    <a asp-page="Details" asp-route-id="@item.UsuarioId">Details</a> |
+                    <a asp-page="Delete" asp-route-id="@item.UsuarioId">Delete</a>
                 </td>
             </tr>
         }

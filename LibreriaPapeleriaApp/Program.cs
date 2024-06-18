@@ -1,4 +1,5 @@
 using LibreriaPapeleriaApp.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Agregar la cadena de conexión
 builder.Services.AddDbContext<LibreriaPapeleriaContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("LibreriaPapeleriaContext")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<LibreriaPapeleriaContext>();
 
 builder.Services.AddRazorPages();
 
