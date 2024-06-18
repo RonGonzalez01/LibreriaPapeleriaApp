@@ -1,4 +1,5 @@
 using LibreriaPapeleriaApp.Data;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +12,9 @@ builder.Services.AddDbContext<LibreriaPapeleriaContext>(options =>
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<LibreriaPapeleriaContext>();
 
+builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddSignalR(); // Añadir SignalR a los servicios
 
 var app = builder.Build();
 
@@ -31,5 +34,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.MapControllers(); // Añadir esto si no está ya presente
+app.MapHub<ChatHub>("/chathub"); // Configurar el endpoint de SignalR
 
 app.Run();
