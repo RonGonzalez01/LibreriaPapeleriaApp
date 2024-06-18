@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using LibreriaPapeleriaApp.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace LibreriaPapeleriaApp.Data
 {
-    public class LibreriaPapeleriaContext : DbContext
+    public class LibreriaPapeleriaContext : IdentityDbContext<IdentityUser>
     {
         public LibreriaPapeleriaContext(DbContextOptions<LibreriaPapeleriaContext> options)
             : base(options)
