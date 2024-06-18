@@ -1,8 +1,8 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using LibreriaPapeleriaApp.Data;
 using LibreriaPapeleriaApp.Models;
-using System.Threading.Tasks;
+using LibreriaPapeleriaApp.Data;
 
 namespace LibreriaPapeleriaApp.Pages.Productos
 {

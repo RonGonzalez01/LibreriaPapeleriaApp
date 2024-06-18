@@ -12,10 +12,20 @@ builder.Services.AddRazorPages();
 var app = builder.Build();
 
 // Configuración restante del pipeline
-app.UseRouting();
-app.UseEndpoints(endpoints =>
+if (!app.Environment.IsDevelopment())
 {
-    endpoints.MapRazorPages();
-});
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapRazorPages();
 
 app.Run();

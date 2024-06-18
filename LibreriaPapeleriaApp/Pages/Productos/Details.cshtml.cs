@@ -1,9 +1,8 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using LibreriaPapeleriaApp.Data;
 using LibreriaPapeleriaApp.Models;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using LibreriaPapeleriaApp.Data;
 
 namespace LibreriaPapeleriaApp.Pages.Productos
 {
@@ -25,7 +24,7 @@ namespace LibreriaPapeleriaApp.Pages.Productos
                 return NotFound();
             }
 
-            Producto = await _context.Productos.FirstOrDefaultAsync(m => m.ProductoId == id);
+            Producto = await _context.Productos.FindAsync(id);
 
             if (Producto == null)
             {

@@ -7,13 +7,9 @@ namespace LibreriaPapeleriaApp.Models
     {
         public int OrdenId { get; set; }
         public DateTime Fecha { get; set; }
-        public decimal Total { get; set; }
-
-        // Relación con Usuario
+        public decimal Total { get; set; } // Tipo decimal
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
-
-        // Relación con DetalleOrdenes
-        public List<DetalleOrden> DetallesOrden { get; set; }
+        public ICollection<DetalleOrden> DetallesOrden { get; set; }
     }
 }

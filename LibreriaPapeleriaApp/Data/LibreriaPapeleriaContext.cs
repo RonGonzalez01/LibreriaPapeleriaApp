@@ -30,6 +30,19 @@ namespace LibreriaPapeleriaApp.Data
                 .WithMany()
                 .HasForeignKey(d => d.ProductoId);
 
+            // Configurar las propiedades decimal con HasColumnType
+            modelBuilder.Entity<Producto>()
+                .Property(p => p.Precio)
+                .HasColumnType("decimal(10,2)");
+
+            modelBuilder.Entity<Orden>()
+                .Property(o => o.Total)
+                .HasColumnType("decimal(10,2)");
+
+            modelBuilder.Entity<DetalleOrden>()
+                .Property(d => d.PrecioUnitario)
+                .HasColumnType("decimal(10,2)");
+
             base.OnModelCreating(modelBuilder);
         }
     }
