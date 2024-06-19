@@ -49,7 +49,7 @@ namespace LibreriaPapeleriaApp.Pages.Productos
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./IndexProductos");
         }
     }
 }

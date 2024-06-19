@@ -1,58 +1,60 @@
-﻿@page
+﻿@page "{id}"
 @model LibreriaPapeleriaApp.Pages.Ordenes.DetailsModel
 @{
     ViewData["Title"] = "Detalles de Orden";
 }
 
-<h1>Detalles de Orden</h1>
+<div class="container mt-5">
+    <h1>Detalles de Orden</h1>
 
-<div>
-    <h4>Orden</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Orden.Fecha)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Orden.Fecha)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Orden.Total)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Orden.Total)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Orden.Usuario.NombreUsuario)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Orden.Usuario.NombreUsuario)
-        </dd>
-    </dl>
-</div>
+    <div>
+        <h4>Orden</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Orden.Fecha)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Orden.Fecha)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Orden.Total)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Orden.Total)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Orden.Usuario.NombreUsuario)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Orden.Usuario.NombreUsuario)
+            </dd>
+        </dl>
+    </div>
 
-<div>
-    <h4>Detalles de la Orden</h4>
-    <hr />
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio Unitario</th>
-                <th>Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var detalle in Model.DetallesOrden)
-            {
+    <div>
+        <h4>Detalles de la Orden</h4>
+        <hr />
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@detalle.Producto.Nombre</td>
-                    <td>@detalle.Cantidad</td>
-                    <td>@detalle.PrecioUnitario.ToString("C")</td>
-                    
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var detalle in Model.DetallesOrden)
+                {
+                    <tr>
+                        <td>@detalle.Producto.Nombre</td>
+                        <td>@detalle.Cantidad</td>
+                        <td>@detalle.PrecioUnitario.ToString("C")</td>
+                        <td>@(detalle.Cantidad * detalle.PrecioUnitario).ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

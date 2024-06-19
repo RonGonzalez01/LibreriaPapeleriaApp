@@ -60,7 +60,7 @@ namespace LibreriaPapeleriaApp.Pages.Productos
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./IndexProductos");
         }
 
         private bool ProductoExists(int id)

@@ -1,7 +1,49 @@
 ﻿@page
 @model LibreriaPapeleriaApp.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Librería Papelería Estrella";
 }
 
-<h1>Welcome to the Home Page</h1>
+<div class="container mt-5">
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Bienvenidos a Librería Papelería Estrella</h1>
+        <p class="lead">Tu lugar de confianza para libros y material de papelería</p>
+        <hr class="my-4">
+        <p>Encuentra todo lo que necesitas para tu estudio y trabajo en un solo lugar.</p>
+        <a class="btn btn-primary btn-lg" href="/Productos/IndexProductos" role="button">Ver Productos</a>
+        <a class="btn btn-secondary btn-lg" href="/Ordenes/IndexOrdenes" role="button">Ver Órdenes</a>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://www.lanacion.com.ar/resizer/v2/credito-QS3KNYFVIFHPJLNBGX45PZCZSM.jpg?auth=50f38491ae3193337eeec020a127bcabf02e8cf5fade7ed15dd8923181e7d2a1&width=880&height=586&quality=70&smart=true" class="card-img-top fixed-size-img" alt="Libros">
+                <div class="card-body">
+                    <h5 class="card-title">Gran Selección de Libros</h5>
+                    <p class="card-text">Explora nuestra extensa colección de libros en diferentes géneros y para todas las edades.</p>
+                    <a href="/Productos/Index" class="btn btn-primary">Explorar Libros</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://w7.pngwing.com/pngs/975/193/png-transparent-office-supplies-paper-office-depot-stationery-material-people-office-business.png" class="card-img-top fixed-size-img" alt="Papelería">
+                <div class="card-body">
+                    <h5 class="card-title">Material de Papelería</h5>
+                    <p class="card-text">Encuentra todo el material de papelería que necesitas para tu oficina o estudio.</p>
+                    <a href="/Productos/Index" class="btn btn-primary">Explorar Papelería</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://img.freepik.com/psd-gratis/logo-3d-render-super-oferta-composiciones-promocion_314999-1715.jpg?size=626&ext=jpg&ga=GA1.1.672697106.1718668800&semt=ais_user" class="card-img-top fixed-size-img" alt="Ofertas">
+                <div class="card-body">
+                    <h5 class="card-title">Ofertas Especiales</h5>
+                    <p class="card-text">Aprovecha nuestras ofertas especiales en una variedad de productos.</p>
+                    <a href="/Ofertas" class="btn btn-primary">Ver Ofertas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

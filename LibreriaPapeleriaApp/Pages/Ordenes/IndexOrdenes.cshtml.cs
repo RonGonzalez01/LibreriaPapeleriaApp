@@ -1,28 +1,27 @@
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using LibreriaPapeleriaApp.Data;
 using LibreriaPapeleriaApp.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using LibreriaPapeleriaApp.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibreriaPapeleriaApp.Pages.Ordenes
 {
-    public class IndexModel : PageModel
+    public class IndexOrdenesModel : PageModel
     {
         private readonly LibreriaPapeleriaContext _context;
 
-        public IndexModel(LibreriaPapeleriaContext context)
+        public IndexOrdenesModel(LibreriaPapeleriaContext context)
         {
             _context = context;
         }
 
-        public IList<Models.Orden> Ordenes { get; set; }
+        public IList<Orden> Ordenes { get; set; }
 
         public async Task OnGetAsync()
         {
             Ordenes = await _context.Ordenes
-                .Include(o => o.DetallesOrden) // Carga los detalles de la orden
+                .Include(o => o.DetallesOrden)
                 .ToListAsync();
         }
     }

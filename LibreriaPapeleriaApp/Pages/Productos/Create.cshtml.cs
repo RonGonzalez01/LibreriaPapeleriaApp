@@ -33,7 +33,7 @@ namespace LibreriaPapeleriaApp.Pages.Productos
             _context.Productos.Add(Producto);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./IndexProductos");
         }
     }
 }
