@@ -2,41 +2,28 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using LibreriaPapeleriaApp.Data;
 using LibreriaPapeleriaApp.Models;
+using LibreriaPapeleriaApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace LibreriaPapeleriaApp.Pages.Productos
 {
-    public class IndexProductosModel : PageModel
+    public class IndexModel : PageModel
     {
-        private readonly LibreriaPapeleriaContext _context;
+        private readonly ProductOrdenService _productOrdenService;
 
-        public IndexProductosModel(LibreriaPapeleriaContext context)
+        public IndexModel(ProductOrdenService productOrdenService)
         {
-            _context = context;
+            _productOrdenService = productOrdenService;
         }
 
         public IList<Producto> Productos { get; set; }
 
         public async Task OnGetAsync()
         {
-            Productos = await _context.Productos.ToListAsync();
-        }
-
-        public async Task<IActionResult> OnPostDeleteAsync(int id)
-        {
-            var producto = await _context.Productos.FindAsync(id);
-
-            if (producto == null)
-            {
-                return NotFound();
-            }
-
-            _context.Productos.Remove(producto);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./IndexProductos");
+            var productos = await _productOrdenService.GetProductosAsync();
+            Productos = productos.ToList(); // Convertir a List<Producto> para evitar el error de conversión
         }
     }
 }

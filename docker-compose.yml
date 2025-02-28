@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  libreria-papeleria-app:
+    image: libreria-papeleria-app
+    build:
+      context: .
+      dockerfile: LibreriaPapeleriaApp/Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - productos-ordenes-api
+      - proveedores-api
+      - api-gateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - BaseUrls__ProductosApi=http://productos-ordenes-api:80
+      - BaseUrls__ProveedoresApi=http://proveedores-api:80
+
+  api-gateway:
+    image: api-gateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    ports:
+      - "5000:80"
+    depends_on:
+      - productos-ordenes-api
+      - proveedores-api
+
+  productos-ordenes-api:
+    image: productos-ordenes-api
+    build:
+      context: .
+      dockerfile: ProductosOrdenesAPI/Dockerfile
+    ports:
+      - "5001:80"
+
+  proveedores-api:
+    image: proveedores-api
+    build:
+      context: .
+      dockerfile: ProveedoresAPI/Dockerfile
+    ports:
+      - "5002:80"

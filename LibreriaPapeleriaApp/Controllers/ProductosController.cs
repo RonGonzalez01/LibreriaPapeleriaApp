@@ -4,143 +4,61 @@ using LibreriaPapeleriaApp.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using LibreriaPapeleriaApp.Services;
 
 namespace LibreriaPapeleriaApp.Controllers
 {
-    public class ProductosController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ProductosController : ControllerBase
     {
-        private readonly LibreriaPapeleriaContext _context;
+        private readonly ProductOrdenService _productOrdenService;
 
-        public ProductosController(LibreriaPapeleriaContext context)
+        public ProductosController(ProductOrdenService productOrdenService)
         {
-            _context = context;
+            _productOrdenService = productOrdenService;
         }
 
-        // GET: Productos
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Producto>>> Get()
         {
-            return View(await _context.Productos.ToListAsync());
+            return Ok(await _productOrdenService.GetProductosAsync());
         }
 
-        // GET: Productos/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Producto>> Get(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var producto = await _context.Productos
-                .FirstOrDefaultAsync(m => m.ProductoId == id);
+            var producto = await _productOrdenService.GetProductoByIdAsync(id);
             if (producto == null)
             {
                 return NotFound();
             }
-
-            return View(producto);
+            return Ok(producto);
         }
 
-        // GET: Productos/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Productos/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductoId,Nombre,Descripcion,Precio,Stock,Categoria")] Producto producto)
+        public async Task<ActionResult> Post([FromBody] Producto producto)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(producto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(producto);
+            await _productOrdenService.CreateProductoAsync(producto);
+            return CreatedAtAction(nameof(Get), new { id = producto.ProductoId }, producto);
         }
 
-        // GET: Productos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var producto = await _context.Productos.FindAsync(id);
-            if (producto == null)
-            {
-                return NotFound();
-            }
-            return View(producto);
-        }
-
-        // POST: Productos/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductoId,Nombre,Descripcion,Precio,Stock,Categoria")] Producto producto)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Put(int id, [FromBody] Producto producto)
         {
             if (id != producto.ProductoId)
             {
-                return NotFound();
+                return BadRequest();
             }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(producto);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductoExists(producto.ProductoId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(producto);
+            await _productOrdenService.UpdateProductoAsync(producto);
+            return NoContent();
         }
 
-        // GET: Productos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var producto = await _context.Productos
-                .FirstOrDefaultAsync(m => m.ProductoId == id);
-            if (producto == null)
-            {
-                return NotFound();
-            }
-
-            return View(producto);
-        }
-
-        // POST: Productos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var producto = await _context.Productos.FindAsync(id);
-            _context.Productos.Remove(producto);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ProductoExists(int id)
-        {
-            return _context.Productos.Any(e => e.ProductoId == id);
+            await _productOrdenService.DeleteProductoAsync(id);
+            return NoContent();
         }
     }
 }

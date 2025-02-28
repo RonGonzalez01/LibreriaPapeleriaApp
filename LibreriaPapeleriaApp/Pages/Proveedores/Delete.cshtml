@@ -1,0 +1,40 @@
+﻿@page "{id}"
+@model LibreriaPapeleriaApp.Pages.Proveedores.DeleteModel
+@{
+    ViewData["Title"] = "Eliminar Proveedor";
+}
+
+<div class="container mt-5">
+    <h1>Eliminar Proveedor</h1>
+
+    <h4>¿Está seguro de que desea eliminar el proveedor?</h4>
+    <div>
+        <h4>Proveedor</h4>
+        <dl class="row">
+            <dt class="col-sm-2">
+                Nombre
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Proveedor.Nombre
+            </dd>
+            <dt class="col-sm-2">
+                Dirección
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Proveedor.Direccion
+            </dd>
+            <dt class="col-sm-2">
+                Teléfono
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Proveedor.Telefono
+            </dd>
+        </dl>
+    </div>
+
+    <form method="post">
+        <input type="hidden" asp-for="Proveedor.ProveedorId" />
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a class="btn btn-secondary" href="./Index">Cancelar</a>
+    </form>
+</div>

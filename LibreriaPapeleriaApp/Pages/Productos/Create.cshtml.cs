@@ -3,24 +3,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using LibreriaPapeleriaApp.Models;
 using LibreriaPapeleriaApp.Data;
+using LibreriaPapeleriaApp.Services;
 
 namespace LibreriaPapeleriaApp.Pages.Productos
 {
     public class CreateModel : PageModel
     {
-        private readonly LibreriaPapeleriaContext _context;
+        private readonly ProductOrdenService _productOrdenService;
 
-        public CreateModel(LibreriaPapeleriaContext context)
+        public CreateModel(ProductOrdenService productOrdenService)
         {
-            _context = context;
+            _productOrdenService = productOrdenService;
         }
 
         [BindProperty]
         public Producto Producto { get; set; }
 
-        public IActionResult OnGet()
+        public void OnGet()
         {
-            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -30,10 +30,8 @@ namespace LibreriaPapeleriaApp.Pages.Productos
                 return Page();
             }
 
-            _context.Productos.Add(Producto);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./IndexProductos");
+            await _productOrdenService.CreateProductoAsync(Producto);
+            return RedirectToPage("Index");
         }
     }
 }

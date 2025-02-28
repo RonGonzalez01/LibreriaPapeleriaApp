@@ -1,0 +1,28 @@
+﻿@page "{id:int}"
+@model LibreriaPapeleriaApp.Pages.Ordenes.EditModel
+@{
+    ViewData["Title"] = "Editar Orden";
+}
+
+<h1>Editar Orden</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Orden.Fecha" class="control-label"></label>
+        <input asp-for="Orden.Fecha" class="form-control" />
+        <span asp-validation-for="Orden.Fecha" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Orden.Total" class="control-label"></label>
+        <input asp-for="Orden.Total" class="form-control" />
+        <span asp-validation-for="Orden.Total" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Orden.UsuarioId" class="control-label"></label>
+        <input asp-for="Orden.UsuarioId" class="form-control" />
+        <span asp-validation-for="Orden.UsuarioId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Guardar" class="btn btn-primary" />
+    </div>
+</form>

@@ -1,8 +1,14 @@
 using LibreriaPapeleriaApp.Data;
+using LibreriaPapeleriaApp.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(80); // Configura Kestrel para escuchar en el puerto 80
+});
 
 // Agregar la cadena de conexión
 builder.Services.AddDbContext<LibreriaPapeleriaContext>(options =>
@@ -14,6 +20,17 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddSignalR(); // Añadir SignalR a los servicios
+
+builder.Services.AddHttpClient<ProductOrdenService>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["BaseUrls:ProductosApi"]);
+});
+
+builder.Services.AddHttpClient<ProveedorService>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["BaseUrls:ProveedoresApi"]);
+});
+
 
 var app = builder.Build();
 
@@ -33,7 +50,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
-app.MapControllers(); // Añadir esto si no está ya presente
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapHub<ChatHub>("/chathub"); // Configurar el endpoint de SignalR
 
 app.Run();

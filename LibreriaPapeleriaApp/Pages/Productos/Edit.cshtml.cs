@@ -4,34 +4,31 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using LibreriaPapeleriaApp.Models;
 using LibreriaPapeleriaApp.Data;
+using LibreriaPapeleriaApp.Services;
 
 namespace LibreriaPapeleriaApp.Pages.Productos
 {
     public class EditModel : PageModel
     {
-        private readonly LibreriaPapeleriaContext _context;
+        private readonly ProductOrdenService _productOrdenService;
 
-        public EditModel(LibreriaPapeleriaContext context)
+        public EditModel(ProductOrdenService productOrdenService)
         {
-            _context = context;
+            _productOrdenService = productOrdenService;
         }
 
         [BindProperty]
         public Producto Producto { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Producto = await _context.Productos.FirstOrDefaultAsync(m => m.ProductoId == id);
+            Producto = await _productOrdenService.GetProductoByIdAsync(id);
 
             if (Producto == null)
             {
                 return NotFound();
             }
+
             return Page();
         }
 
@@ -42,30 +39,8 @@ namespace LibreriaPapeleriaApp.Pages.Productos
                 return Page();
             }
 
-            _context.Attach(Producto).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductoExists(Producto.ProductoId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./IndexProductos");
-        }
-
-        private bool ProductoExists(int id)
-        {
-            return _context.Productos.Any(e => e.ProductoId == id);
+            await _productOrdenService.UpdateProductoAsync(Producto);
+            return RedirectToPage("Index");
         }
     }
 }

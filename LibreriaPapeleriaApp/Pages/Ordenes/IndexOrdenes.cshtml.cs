@@ -4,25 +4,25 @@ using System.Threading.Tasks;
 using LibreriaPapeleriaApp.Models;
 using LibreriaPapeleriaApp.Data;
 using Microsoft.EntityFrameworkCore;
+using LibreriaPapeleriaApp.Services;
 
 namespace LibreriaPapeleriaApp.Pages.Ordenes
 {
-    public class IndexOrdenesModel : PageModel
+    public class IndexModel : PageModel
     {
-        private readonly LibreriaPapeleriaContext _context;
+        private readonly ProductOrdenService _productOrdenService;
 
-        public IndexOrdenesModel(LibreriaPapeleriaContext context)
+        public IndexModel(ProductOrdenService productOrdenService)
         {
-            _context = context;
+            _productOrdenService = productOrdenService;
         }
 
         public IList<Orden> Ordenes { get; set; }
 
         public async Task OnGetAsync()
         {
-            Ordenes = await _context.Ordenes
-                .Include(o => o.DetallesOrden)
-                .ToListAsync();
+            var ordenes = await _productOrdenService.GetOrdenesAsync();
+            Ordenes = ordenes.ToList(); // Convertir a List<Orden> para evitar el error de conversión
         }
     }
 }
